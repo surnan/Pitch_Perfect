@@ -12,7 +12,7 @@ extension UIColor {
     
     static let someColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     
-    static let tealColor = UIColor(red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
+    static let teal = UIColor(red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
     
     static let lightRed = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
     
