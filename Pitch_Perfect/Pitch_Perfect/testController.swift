@@ -52,7 +52,8 @@ class testController: UIViewController {
             slowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             slowButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            
+//            echoButton.widthAnchor.constraint(equalTo: slowButton.widthAnchor),
+//            echoButton.heightAnchor.constraint(equalTo: slowButton.heightAnchor),
             
             echoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             echoButton.topAnchor.constraint(equalTo: slowButton.bottomAnchor, constant: 30)
