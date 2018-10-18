@@ -8,11 +8,11 @@
 
 import UIKit
 
-//extension UINavigationController {
-//    open override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
-//}
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}
 
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -22,13 +22,9 @@ class CustomNavigationController: UINavigationController {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = UIColor.darkBlue
         UINavigationBar.appearance().shadowImage = UIImage()
@@ -37,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
+        
 //        window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
+        window?.rootViewController = CustomNavigationController(rootViewController: testController())
         
-        
-        window?.rootViewController = CustomNavigationController(rootViewController: PlaySoundController())
         
         
         return true

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum imageNames: String {
     case microphone
     case stop

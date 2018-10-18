@@ -8,10 +8,6 @@
 
 import UIKit
 
-
-
-
-
 class RecordSoundsController: UIViewController {
     
     let micIconSize: CGFloat = 150.0
@@ -24,14 +20,14 @@ class RecordSoundsController: UIViewController {
         return label
     }()
     
-    var recording = false
+    var isRecording = false
     
     let recordButton: UIButton = {
-        let openingImage = UIImage(named: "microphone")
+        let openingImage = UIImage(named: imageNames.microphone.rawValue)
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.backgroundColor = UIColor.teal
-        button.clipsToBounds = true
+//        button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -39,18 +35,20 @@ class RecordSoundsController: UIViewController {
     
     @objc private func handleRecordButton(){
         print("BUTTON PRESSED")
-        if recording == false {
-              let openingImage = UIImage(named: imageNames.microphone.rawValue)
+        
+        if isRecording == false {
+            let openingImage = UIImage(named: imageNames.stop.rawValue)
             recordButton.setImage(openingImage, for: .normal)
             print("FALSE")
         } else {
-            let openingImage = UIImage(named: imageNames.stop.rawValue)
+            let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
+            let newPlaySoundController = PlaySoundController()
+            navigationController?.pushViewController(newPlaySoundController, animated: true)
             print("TRUE")
         }
         
-        recording = !recording
-        
+        isRecording = !isRecording
     }
     
     private func updateRecordButton(){
@@ -58,14 +56,12 @@ class RecordSoundsController: UIViewController {
     }
     
     
-    private func setupNavigationBar(){
+    func setupNavigationBar(){
         navigationItem.title = "Pitch Perfect"
-        
-        recordButton.addTarget(self, action: #selector(handleRecordButton), for: .touchDown)
-        
     }
     
     private func setupUI(){
+        recordButton.addTarget(self, action: #selector(handleRecordButton), for: .touchDown)
         updateRecordButton()
         [instructionLabel, recordButton].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
@@ -81,6 +77,10 @@ class RecordSoundsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.darkBlue
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupNavigationBar()
         setupUI()
     }
