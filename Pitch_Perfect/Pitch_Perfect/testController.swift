@@ -28,6 +28,7 @@ extension testController {
         [slowButton, echoButton, chipmunkButton, darthvaderButton, fastButton, stopButton, reverbButton].forEach{
             $0.addTarget(self, action: #selector(handleButton), for: .touchDown)
         }
+        
         [slowButton, echoButton, chipmunkButton, darthvaderButton, fastButton, stopButton, reverbButton].forEach{view.addSubview($0)}
         
         
@@ -53,7 +54,20 @@ extension testController {
             ])
     }
     
-    @objc func handleButton(){
-        print("BUTTON PRESSED")
+    @objc func handleButton(_ sender: UIButton){
+        var tempText = "!! BAD SWITCH!!"
+        
+        switch sender.titleLabel?.text {
+        case "SLOW": tempText = "SLOW"
+        case "ECHO": tempText = "ECHO"
+        case "CHIPMUNK": tempText = "CHIPMUNK"
+        case "REVERB": tempText = "REVERB"
+        case "STOP": tempText = "STOP"
+        case "FAST": tempText = "FAST"
+        default: tempText = "DEFAULT triggered!!!"
+        }
+        
+        print("tempText = ", tempText)
+        
     }
 }

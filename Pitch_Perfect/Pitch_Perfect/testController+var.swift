@@ -16,6 +16,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.red
+        button.titleLabel?.text = "SLOW"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -26,6 +27,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.green
+        button.titleLabel?.text = "ECHO"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -37,6 +39,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.lightGray
+        button.titleLabel?.text = "CHIPMUNK"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -47,6 +50,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.mediumPurple
+        button.titleLabel?.text = "DARTHVADER"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -57,6 +61,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.lightOrange
+        button.titleLabel?.text = "FAST"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -67,6 +72,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.yellow
+        button.titleLabel?.text = "STOP"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -77,6 +83,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.veryLightGrey
+        button.titleLabel?.text = "REVERB"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
