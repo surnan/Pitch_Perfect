@@ -9,12 +9,10 @@
 import UIKit
 
 class RecordSoundsController: UIViewController {
-//
     let micIconSize: CGFloat = 150.0
 
     let instructionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Tap to start recording"
         label.textColor = UIColor.lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,13 +41,12 @@ class RecordSoundsController: UIViewController {
         } else {
             let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
-//            let newPlaySoundController = PlaySoundController()
             let newPlaySoundController = PlaySoundController()
             navigationController?.pushViewController(newPlaySoundController, animated: true)
             print("TRUE")
         }
-
         isRecording = !isRecording
+        updateRecordLabel()
     }
 
     private func updateRecordButton(){
@@ -61,7 +58,13 @@ class RecordSoundsController: UIViewController {
         navigationItem.title = "Pitch Perfect"
     }
 
+    func updateRecordLabel(){
+        instructionLabel.text = isRecording ?  "Tap to stop recording" : "Tap to start recording"
+    }
+    
+    
     private func setupUI(){
+        updateRecordLabel()
         recordButton.addTarget(self, action: #selector(handleRecordButton), for: .touchDown)
         updateRecordButton()
         [instructionLabel, recordButton].forEach{view.addSubview($0)}
