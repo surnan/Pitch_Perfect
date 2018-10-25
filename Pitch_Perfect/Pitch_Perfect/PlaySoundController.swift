@@ -1,170 +1,72 @@
 //
-//  PlaySoundController.swift
+//  testController.swift
 //  Pitch_Perfect
 //
-//  Created by admin on 10/3/18.
-//  Copyright © 2018 admin. All rights reserved.
+//  Created by admin on 10/5/18.
+//  Copyright © 1518 admin. All rights reserved.
 //
 
 import UIKit
 
-
-
-class PlaySoundController: UIViewController {
+extension PlaySoundController {
     
-    let iconSize: CGFloat = 25.0
-    
-    let slowButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.slow.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.setImage(openingImage, for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        button.frame = CGRect(x: 0, y: 0, width: 160    , height: 125)
-        
-        
-//        button.frame = CGRect(x: 0, y: 0, width: iconSize, height: iconSize)
-        
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.backgroundColor = UIColor.teal
-        
-        
-//        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let fastButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.fast.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.setImage(openingImage, for: .normal)
-        button.backgroundColor = UIColor.green
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let chipmunkButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.chipmunk.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.setImage(openingImage, for: .normal)
-        button.backgroundColor = UIColor.red
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let darthvaderButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.darthvader.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.setImage(openingImage, for: .normal)
-        button.backgroundColor = UIColor.white
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let echoButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.echo.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.setImage(openingImage, for: .normal)
-        button.backgroundColor = UIColor.purple
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let reverbButton: UIButton = {
-        let openingImage = UIImage(named: imageNames.reverb.rawValue)
-        let button = UIButton(type: UIButton.ButtonType.custom)
-        button.setImage(openingImage, for: .normal)
-        button.backgroundColor = UIColor.gray
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    let topRow: UIStackView = {
-       let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.spacing = 50
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-
-    let middleRow: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.spacing = 50
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    let bottomRow: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.spacing = 50
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    let fullStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 50
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+ 
     
     
-    private func setupNavigationBar(){
-        navigationItem.title = "Pitch Perfect"
+    override func viewDidLayoutSubviews() {
+        [slowButton, echoButton, chipmunkButton, darthvaderButton, fastButton, reverbButton, stopButton].forEach{
+            $0.layer.cornerRadius = $0.bounds.size.width / 2
+            $0.clipsToBounds = true
+        }
     }
-    
-    
-    
-    func setupButtons(){
-        
-    }
-    
-    
-    private func setupStackViews(){
-        [slowButton, fastButton].forEach{topRow.addArrangedSubview($0)}
-        [chipmunkButton, darthvaderButton].forEach{middleRow.addArrangedSubview($0)}
-        [echoButton, reverbButton].forEach{bottomRow.addArrangedSubview($0)}
-        [topRow, middleRow, bottomRow].forEach{fullStack.addArrangedSubview($0)}
-    }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.darkBlue
-        setupNavigationBar()
-        setupStackViews()
+
         
-        [fullStack,topRow, middleRow, bottomRow].forEach{view.addSubview($0)}
-       
-//        fullStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        fullStack.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        [slowButton, echoButton, chipmunkButton, darthvaderButton, fastButton, stopButton, reverbButton].forEach{
+            $0.addTarget(self, action: #selector(handleButton), for: .touchDown)
+        }
+        
+        [slowButton, echoButton, chipmunkButton, darthvaderButton, fastButton, stopButton, reverbButton].forEach{view.addSubview($0)}
+        
         
         NSLayoutConstraint.activate([
-            topRow.heightAnchor.constraint(equalToConstant: 150),
-            middleRow.heightAnchor.constraint(equalToConstant: 150),
-            bottomRow.heightAnchor.constraint(equalToConstant: 150),
-            
-            topRow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            middleRow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bottomRow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            chipmunkButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            darthvaderButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            echoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fastButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reverbButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            slowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            topRow.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            middleRow.topAnchor.constraint(equalTo: topRow.bottomAnchor, constant: 30),
-            bottomRow.topAnchor.constraint(equalTo: middleRow.bottomAnchor, constant: 30),
+            chipmunkButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            darthvaderButton.topAnchor.constraint(equalTo: chipmunkButton.bottomAnchor, constant: 15),
+            echoButton.topAnchor.constraint(equalTo: darthvaderButton.bottomAnchor, constant: 15),
+            fastButton.topAnchor.constraint(equalTo: echoButton.bottomAnchor, constant: 15),
+            reverbButton.topAnchor.constraint(equalTo: fastButton.bottomAnchor, constant: 15),
+            slowButton.topAnchor.constraint(equalTo: reverbButton.bottomAnchor, constant: 15),
+            stopButton.topAnchor.constraint(equalTo: slowButton.bottomAnchor, constant: 15),
+            
+            //echoButton.widthAnchor.constraint(equalTo: slowButton.widthAnchor),
+            //echoButton.heightAnchor.constraint(equalTo: slowButton.heightAnchor),
             ])
     }
+    
+    @objc func handleButton(_ sender: UIButton){
+        var tempText = "!! BAD SWITCH!!"
+        switch sender.titleLabel?.text {
+        case "SLOW": tempText = "SLOW"
+        case "ECHO": tempText = "ECHO"
+        case "CHIPMUNK": tempText = "CHIPMUNK"
+        case "REVERB": tempText = "REVERB"
+        case "STOP": tempText = "STOP"
+        case "FAST": tempText = "FAST"
+        default: tempText = "DEFAULT triggered!!!"
+        }
+        
+        print("tempText = ", tempText)
+        
+    }
 }
-

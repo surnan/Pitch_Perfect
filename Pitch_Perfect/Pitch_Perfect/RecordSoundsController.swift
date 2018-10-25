@@ -9,9 +9,9 @@
 import UIKit
 
 class RecordSoundsController: UIViewController {
-    
+//
     let micIconSize: CGFloat = 150.0
-    
+
     let instructionLabel: UILabel = {
         let label = UILabel()
         label.text = "Tap to start recording"
@@ -19,9 +19,9 @@ class RecordSoundsController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     var isRecording = false
-    
+
     let recordButton: UIButton = {
         let openingImage = UIImage(named: imageNames.microphone.rawValue)
         let button = UIButton(type: UIButton.ButtonType.custom)
@@ -31,11 +31,11 @@ class RecordSoundsController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    
+
+
     @objc private func handleRecordButton(){
         print("BUTTON PRESSED")
-        
+
         if isRecording == false {
             let openingImage = UIImage(named: imageNames.stop.rawValue)
             recordButton.setImage(openingImage, for: .normal)
@@ -43,23 +43,24 @@ class RecordSoundsController: UIViewController {
         } else {
             let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
+//            let newPlaySoundController = PlaySoundController()
             let newPlaySoundController = PlaySoundController()
             navigationController?.pushViewController(newPlaySoundController, animated: true)
             print("TRUE")
         }
-        
+
         isRecording = !isRecording
     }
-    
+
     private func updateRecordButton(){
         recordButton.layer.cornerRadius = micIconSize / 2
     }
-    
-    
+
+
     func setupNavigationBar(){
         navigationItem.title = "Pitch Perfect"
     }
-    
+
     private func setupUI(){
         recordButton.addTarget(self, action: #selector(handleRecordButton), for: .touchDown)
         updateRecordButton()
@@ -73,12 +74,12 @@ class RecordSoundsController: UIViewController {
             recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             ])
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.darkBlue
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationBar()

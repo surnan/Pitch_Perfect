@@ -1,5 +1,5 @@
 //
-//  testController+var.swift
+//  PlaySoundController+var.swift
 //  Pitch_Perfect
 //
 //  Created by admin on 10/17/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class testController: UIViewController {
+class PlaySoundController: UIViewController {
     
     let slowButton: UIButton = {
         let openingImage = UIImage(named: "slow")
