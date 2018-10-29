@@ -43,7 +43,7 @@ class RecordSoundsController: UIViewController {
         } else {
             let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
-            let newPlaySoundController = PlaySoundController()
+            let newPlaySoundController = testController()
             navigationController?.pushViewController(newPlaySoundController, animated: true)
             print("TRUE")
         }

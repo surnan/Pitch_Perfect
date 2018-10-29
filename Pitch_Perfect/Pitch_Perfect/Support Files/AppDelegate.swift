@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-//        window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
-        window?.rootViewController = CustomNavigationController(rootViewController: testController())
+        window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
+//        window?.rootViewController = CustomNavigationController(rootViewController: testController())
         
         
         
