@@ -10,34 +10,110 @@ import UIKit
 
 class testController: UIViewController {
     
-    lazy var slowButton: UIButton = {
+    let slowButton: UIButton = {
         let openingImage = UIImage(named: "slow")
-        
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.red
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = button.bounds.size.width / 2
         return button
     }()
     
-    lazy var echoButton: UIButton = {
+    let echoButton: UIButton = {
         let openingImage = UIImage(named: "echo")
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.green
-        
         button.layer.cornerRadius = button.bounds.size.width / 2
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+        return button
+    }()
+    
+    let fastButton: UIButton = {
+        let openingImage = UIImage(named: "fast")
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(openingImage, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.backgroundColor = UIColor.white
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    let chipmunkButton: UIButton = {
+        let openingImage = UIImage(named: "chipmunk")
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(openingImage, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.backgroundColor = UIColor.teal
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     
-    let finalStackView: UIStackView = {
+    let darthvaderButton: UIButton = {
+        let openingImage = UIImage(named: "darthvader")
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(openingImage, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.backgroundColor = UIColor.orange
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let reverbButton: UIButton = {
+        let openingImage = UIImage(named: "reverb")
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(openingImage, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.backgroundColor = UIColor.gray
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let stopButton: UIButton = {
+        let openingImage = UIImage(named: "stop")
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(openingImage, for: .normal)
+        button.imageView?.contentMode = .scaleToFill
+        button.backgroundColor = UIColor.gray
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
+    let horizontalRowTop: UIStackView = {
+       let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 50
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    let horizontalRowMiddle: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 50
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    let horizontalRowBtm: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 50
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    let finalVerticalStack: UIStackView = {
        var stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 20
@@ -46,26 +122,18 @@ class testController: UIViewController {
     }()
     
     
-    override func viewDidLayoutSubviews() {
-        slowButton.layer.cornerRadius = slowButton.bounds.size.width / 2
-        slowButton.clipsToBounds = true
-        
-        echoButton.layer.cornerRadius = echoButton.bounds.size.width / 2
-        echoButton.clipsToBounds = true
-    }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         DispatchQueue.main.async {
-            self.slowButton.layer.cornerRadius = self.slowButton.bounds.size.width / 2
-            self.slowButton.clipsToBounds = true
-            
-            self.echoButton.layer.cornerRadius = self.echoButton.bounds.size.width / 2
-            self.echoButton.clipsToBounds = true
+            [self.slowButton, self.echoButton, self.fastButton, self.reverbButton, self.chipmunkButton, self.darthvaderButton, self.stopButton].forEach{
+                $0.layer.cornerRadius =  $0.bounds.size.width / 2
+                $0.clipsToBounds = true
+            }
         }
-        
     }
 
     override func viewDidLoad() {
@@ -73,13 +141,13 @@ class testController: UIViewController {
         view.backgroundColor = UIColor.yellow
         slowButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
         echoButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        
-//        useIndividualButtons()
+        fastButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
+        reverbButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
+
+
         useStack()
 
-//        super.view.setNeedsUpdateConstraints()
-//        super.view.setNeedsLayout()
-//        super.view.setNeedsDisplay()
+
  
     }
     
@@ -89,30 +157,47 @@ class testController: UIViewController {
     
     
     func useStack(){
-        [slowButton, echoButton].forEach{finalStackView.addArrangedSubview($0)}
+        [slowButton, fastButton].forEach{horizontalRowTop.addArrangedSubview($0)}
+        [chipmunkButton, darthvaderButton].forEach{horizontalRowMiddle.addArrangedSubview($0)}
+        [echoButton, reverbButton].forEach{horizontalRowBtm.addArrangedSubview($0)}
         
-        slowButton.layer.cornerRadius = slowButton.bounds.size.width / 2
-        slowButton.clipsToBounds = true
-        echoButton.layer.cornerRadius = echoButton.bounds.size.width / 2
-        echoButton.clipsToBounds = true
-
+        [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{finalVerticalStack.addArrangedSubview($0)}
         
-        view.addSubview(finalStackView)
+        view.addSubview(finalVerticalStack)
         NSLayoutConstraint.activate([
-            finalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            finalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            ])
-    }
-    
-    
-    func useIndividualButtons(){
-        view.addSubview(slowButton)
-        view.addSubview(echoButton)
-        NSLayoutConstraint.activate([
-            slowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            slowButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            echoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            echoButton.topAnchor.constraint(equalTo: slowButton.bottomAnchor, constant: 30)
+            finalVerticalStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            finalVerticalStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100)
             ])
     }
 }
+
+
+
+
+/*
+ func useIndividualButtons(){
+ view.addSubview(slowButton)
+ view.addSubview(echoButton)
+ NSLayoutConstraint.activate([
+ slowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+ slowButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+ echoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+ echoButton.topAnchor.constraint(equalTo: slowButton.bottomAnchor, constant: 30)
+ ])
+ }
+ */
+
+
+/*
+     override func viewDidLayoutSubviews() {
+         slowButton.layer.cornerRadius = slowButton.bounds.size.width / 2
+         slowButton.clipsToBounds = true
+ 
+         echoButton.layer.cornerRadius = echoButton.bounds.size.width / 2
+         echoButton.clipsToBounds = true
+ 
+         fastButton.layer.cornerRadius = echoButton.bounds.size.width / 2
+         fastButton.clipsToBounds = true
+ 
+     }
+ */
