@@ -77,16 +77,6 @@ class testController: UIViewController {
 //        useIndividualButtons()
         useStack()
 
-        
-//        echoButton.setNeedsUpdateConstraints()
-//        echoButton.setNeedsLayout()
-//        echoButton.setNeedsDisplay()
-//
-//        finalStackView.setNeedsUpdateConstraints()
-//        finalStackView.setNeedsLayout()
-//        finalStackView.setNeedsDisplay()
-//
-//
 //        super.view.setNeedsUpdateConstraints()
 //        super.view.setNeedsLayout()
 //        super.view.setNeedsDisplay()

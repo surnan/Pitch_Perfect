@@ -72,7 +72,7 @@ class RecordSoundsController: UIViewController {
             recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             ])
-    }
+    }             
     
     override func viewDidLoad() {
         super.viewDidLoad()
