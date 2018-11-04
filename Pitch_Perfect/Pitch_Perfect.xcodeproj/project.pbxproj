@@ -14,7 +14,7 @@
 		8409516F216540AC00A8A7E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8409516D216540AC00A8A7E0 /* LaunchScreen.storyboard */; };
 		840951792165416C00A8A7E0 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840951782165416C00A8A7E0 /* UIColor+theme.swift */; };
 		8409517E21656E7000A8A7E0 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409517D21656E7000A8A7E0 /* Extras.swift */; };
-		840951802168518500A8A7E0 /* testController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409517F2168518500A8A7E0 /* testController.swift */; };
+		840951802168518500A8A7E0 /* PlaySoundsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409517F2168518500A8A7E0 /* PlaySoundsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		84095170216540AC00A8A7E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		840951782165416C00A8A7E0 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		8409517D21656E7000A8A7E0 /* Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
-		8409517F2168518500A8A7E0 /* testController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testController.swift; sourceTree = "<group>"; };
+		8409517F2168518500A8A7E0 /* PlaySoundsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 			children = (
 				840951782165416C00A8A7E0 /* UIColor+theme.swift */,
 				84095166216540AA00A8A7E0 /* RecordSoundsController.swift */,
-				8409517F2168518500A8A7E0 /* testController.swift */,
+				8409517F2168518500A8A7E0 /* PlaySoundsController.swift */,
 				8409517D21656E7000A8A7E0 /* Extras.swift */,
 				8409517A2165694E00A8A7E0 /* Support Files */,
 				84095170216540AC00A8A7E0 /* Info.plist */,
@@ -155,7 +155,7 @@
 				840951792165416C00A8A7E0 /* UIColor+theme.swift in Sources */,
 				8409517E21656E7000A8A7E0 /* Extras.swift in Sources */,
 				84095167216540AA00A8A7E0 /* RecordSoundsController.swift in Sources */,
-				840951802168518500A8A7E0 /* testController.swift in Sources */,
+				840951802168518500A8A7E0 /* PlaySoundsController.swift in Sources */,
 				84095165216540AA00A8A7E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

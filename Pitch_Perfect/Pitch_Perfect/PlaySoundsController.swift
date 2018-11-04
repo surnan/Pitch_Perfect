@@ -1,5 +1,5 @@
 //
-//  testController.swift
+//  PlaySoundsController.swift
 //  Pitch_Perfect
 //
 //  Created by admin on 10/5/18.
@@ -8,7 +8,16 @@
 
 import UIKit
 
-class testController: UIViewController {
+class PlaySoundsController: UIViewController {
+    
+    enum ButtonTags: Int {
+        case slow = 111
+        case echo = 222
+        case fast = 333
+        case chipmunk = 444
+        case darthvader = 555
+        case reverb = 666
+    }
     
     let slowButton: UIButton = {
         let openingImage = UIImage(named: "slow")
@@ -16,6 +25,7 @@ class testController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.red
+        button.tag = buttonTags.slow.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = button.bounds.size.width / 2
         return button
@@ -28,6 +38,7 @@ class testController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.green
         button.layer.cornerRadius = button.bounds.size.width / 2
+        button.tag = buttonTags.echo.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -39,6 +50,7 @@ class testController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.white
         button.layer.cornerRadius = button.bounds.size.width / 2
+        button.tag = buttonTags.fast.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -50,6 +62,7 @@ class testController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.teal
         button.layer.cornerRadius = button.bounds.size.width / 2
+        button.tag = buttonTags.chipmunk.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -62,6 +75,7 @@ class testController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.orange
         button.layer.cornerRadius = button.bounds.size.width / 2
+        button.tag = buttonTags.darthvader.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -73,12 +87,13 @@ class testController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = button.bounds.size.width / 2
+        button.tag = buttonTags.reverb.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let stopButton: UIButton = {
-        let openingImage = UIImage(named: "stop")
+        let openingImage = UIImage(named: "_stop")
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
@@ -121,10 +136,6 @@ class testController: UIViewController {
         return stack
     }()
     
-    
-
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -138,21 +149,25 @@ class testController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.yellow
+        view.backgroundColor = UIColor.darkBlue
         slowButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
         echoButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
         fastButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
         reverbButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-
-
+        chipmunkButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
+        darthvaderButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
         useStack()
-
-
- 
+        
+        view.addSubview(stopButton)
+        NSLayoutConstraint.activate([
+            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stopButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+            ])
+        
     }
     
-    @objc func handleButton(){
-        print("BUTTON PRESSED")
+    @objc func handleButton(_ sender: UIButton?){
+        print("BUTTON PRESSED, tag = \(sender?.tag ?? 0)")
     }
     
     
@@ -166,38 +181,18 @@ class testController: UIViewController {
         view.addSubview(finalVerticalStack)
         NSLayoutConstraint.activate([
             finalVerticalStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            finalVerticalStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100)
+            finalVerticalStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             ])
     }
 }
-
-
-
-
-/*
- func useIndividualButtons(){
- view.addSubview(slowButton)
- view.addSubview(echoButton)
- NSLayoutConstraint.activate([
- slowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
- slowButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
- echoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
- echoButton.topAnchor.constraint(equalTo: slowButton.bottomAnchor, constant: 30)
- ])
- }
- */
-
 
 /*
      override func viewDidLayoutSubviews() {
          slowButton.layer.cornerRadius = slowButton.bounds.size.width / 2
          slowButton.clipsToBounds = true
- 
          echoButton.layer.cornerRadius = echoButton.bounds.size.width / 2
          echoButton.clipsToBounds = true
- 
          fastButton.layer.cornerRadius = echoButton.bounds.size.width / 2
          fastButton.clipsToBounds = true
- 
      }
  */
