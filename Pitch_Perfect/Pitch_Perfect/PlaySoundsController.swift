@@ -25,7 +25,7 @@ class PlaySoundsController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.red
-        button.tag = buttonTags.slow.rawValue
+        button.tag = ButtonTags.slow.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = button.bounds.size.width / 2
         return button
@@ -38,7 +38,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.green
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = buttonTags.echo.rawValue
+        button.tag = ButtonTags.echo.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -50,7 +50,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.white
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = buttonTags.fast.rawValue
+        button.tag = ButtonTags.fast.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -62,7 +62,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.teal
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = buttonTags.chipmunk.rawValue
+        button.tag = ButtonTags.chipmunk.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -75,7 +75,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.orange
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = buttonTags.darthvader.rawValue
+        button.tag = ButtonTags.darthvader.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -87,7 +87,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = buttonTags.reverb.rawValue
+        button.tag = ButtonTags.reverb.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
