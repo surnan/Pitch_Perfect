@@ -34,8 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
+<<<<<<< HEAD
         window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
 //        window?.rootViewController = CustomNavigationController(rootViewController: testController())
+||||||| merged common ancestors
+//        window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
+        window?.rootViewController = CustomNavigationController(rootViewController: testController())
+        
+=======
+        window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
+//        window?.rootViewController = CustomNavigationController(rootViewController: testController())
+        
+>>>>>>> inset-stop-into-horizontal-middle-stack
         
 //        RecordSoundsController
 //        PlaySoundController

@@ -25,28 +25,37 @@ class RecordSoundsController: UIViewController {
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.backgroundColor = UIColor.teal
-//        button.clipsToBounds = true
+        button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
 
     @objc private func handleRecordButton(){
+<<<<<<< HEAD
         print("BUTTON PRESSED")
 
+||||||| merged common ancestors
+        print("BUTTON PRESSED")
+        
+=======
+>>>>>>> inset-stop-into-horizontal-middle-stack
         if isRecording == false {
             let openingImage = UIImage(named: imageNames.stop.rawValue)
             recordButton.setImage(openingImage, for: .normal)
-            print("FALSE")
         } else {
             let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
-            let newPlaySoundController = PlaySoundController()
+            let newPlaySoundController = PlaySoundsController()
             navigationController?.pushViewController(newPlaySoundController, animated: true)
-            print("TRUE")
         }
         isRecording = !isRecording
+<<<<<<< HEAD
         updateRecordLabel()
+||||||| merged common ancestors
+=======
+        updateInstructionLabel()
+>>>>>>> inset-stop-into-horizontal-middle-stack
     }
 
     private func updateRecordButton(){
@@ -77,10 +86,21 @@ class RecordSoundsController: UIViewController {
             recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             ])
     }
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+    
+=======
+    
+    private func updateInstructionLabel(){
+        instructionLabel.text = isRecording ? "Tap to stop recording" : "Tap to start recording"
+    }
+    
+>>>>>>> inset-stop-into-horizontal-middle-stack
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.darkBlue
+        updateInstructionLabel()
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIColor {
+<<<<<<< HEAD
     static let teal = UIColor(displayP3Red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
     static let lightRed = UIColor(displayP3Red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
     static let darkBlue = UIColor(displayP3Red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
@@ -21,4 +22,23 @@ extension UIColor {
     static let lightOrange = UIColor(displayP3Red: 255/255, green: 204/255, blue: 153/255, alpha: 1)
     static let lightBrown = UIColor(displayP3Red: 145/255, green: 130/255, blue: 130/255, alpha: 1)
     static let veryLightGrey = UIColor(displayP3Red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+||||||| merged common ancestors
+    
+    static let someColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    static let teal = UIColor(red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
+    
+    static let lightRed = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
+    
+    static let darkBlue = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
+    
+    static let lightBlue = UIColor(red: 218/255, green: 235/255, blue: 243/255, alpha: 1)
+    
+=======
+    static let someColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    static let teal = UIColor(red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
+    static let lightRed = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
+    static let darkBlue = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
+    static let lightBlue = UIColor(red: 218/255, green: 235/255, blue: 243/255, alpha: 1)
+>>>>>>> inset-stop-into-horizontal-middle-stack
 }
