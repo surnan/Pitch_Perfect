@@ -48,7 +48,7 @@ class PlaySoundsController: UIViewController {
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = UIColor.yellow
         button.layer.cornerRadius = button.bounds.size.width / 2
         button.tag = ButtonTags.fast.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -97,12 +97,22 @@ class PlaySoundsController: UIViewController {
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = UIColor.white
         button.layer.cornerRadius = button.bounds.size.width / 2
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    let backButton: UIButton = {
+       let button = UIButton()
+        let myString = "RECORD A NEW SOUND"
+        let myAttrString = NSAttributedString(string: myString, attributes: [NSAttributedString.Key.font: UIFont(name: "Verdana-Bold", size: 16.0) as Any,
+                                                                             NSAttributedString.Key.foregroundColor : UIColor.teal,
+                                                                            ])
+        button.setAttributedTitle(myAttrString, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let horizontalRowTop: UIStackView = {
        let stack = UIStackView()
@@ -138,7 +148,6 @@ class PlaySoundsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         DispatchQueue.main.async {
             [self.slowButton, self.echoButton, self.fastButton, self.reverbButton, self.chipmunkButton, self.darthvaderButton, self.stopButton].forEach{
                 $0.layer.cornerRadius =  $0.bounds.size.width / 2
@@ -149,40 +158,56 @@ class PlaySoundsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         view.backgroundColor = UIColor.darkBlue
-        slowButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        echoButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        fastButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        reverbButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        chipmunkButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        darthvaderButton.addTarget(self, action: #selector(handleButton), for: .touchDown)
-        useStack()
         
-        view.addSubview(stopButton)
-        NSLayoutConstraint.activate([
-            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
-            ])
+        [slowButton, echoButton, fastButton, reverbButton, chipmunkButton, darthvaderButton].forEach{
+            $0.addTarget(self, action: #selector(handleSoundButton), for: .touchDown)
+        }
         
-    }
-    
-    @objc func handleButton(_ sender: UIButton?){
-        print("BUTTON PRESSED, tag = \(sender?.tag ?? 0)")
-    }
-    
-    
-    func useStack(){
-        [slowButton, fastButton].forEach{horizontalRowTop.addArrangedSubview($0)}
-        [chipmunkButton, darthvaderButton].forEach{horizontalRowMiddle.addArrangedSubview($0)}
-        [echoButton, reverbButton].forEach{horizontalRowBtm.addArrangedSubview($0)}
+        stopButton.addTarget(self, action: #selector(handleStopButton), for: .touchDown)
+        backButton.addTarget(self, action: #selector(handleBackButton), for: .touchDown)
         
-        [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{finalVerticalStack.addArrangedSubview($0)}
+        setupSoundButtonStack()
         
-        view.addSubview(finalVerticalStack)
+        [finalVerticalStack, stopButton, backButton].forEach{view.addSubview($0)}
+        
         NSLayoutConstraint.activate([
             finalVerticalStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             finalVerticalStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stopButton.topAnchor.constraint(equalTo: finalVerticalStack.bottomAnchor, constant: 30),
+            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backButton.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 40)
             ])
+    }
+    
+    private func setupNavigationBar(){
+        navigationItem.title = "Pitch Perfect"
+        self.navigationItem.hidesBackButton = true
+    }
+    
+    @objc func handleSoundButton(_ sender: UIButton?){
+        print("BUTTON PRESSED, tag = \(sender?.tag ?? 0)")
+    }
+
+    
+    @objc func handleStopButton(_ sender: UIButton?){
+        print("STOPPED Recording")
+    }
+
+    
+    @objc func handleBackButton(_ sender: UIButton?){
+        print("RECORD NEW SOUND PRESSED")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    func setupSoundButtonStack(){
+        [slowButton, fastButton].forEach{horizontalRowTop.addArrangedSubview($0)}
+        [chipmunkButton, darthvaderButton].forEach{horizontalRowMiddle.addArrangedSubview($0)}
+        [echoButton, reverbButton].forEach{horizontalRowBtm.addArrangedSubview($0)}
+        [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{finalVerticalStack.addArrangedSubview($0)}
     }
 }
 
