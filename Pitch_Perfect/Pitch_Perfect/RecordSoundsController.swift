@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
-class RecordSoundsController: UIViewController {
+class RecordSoundsController: UIViewController, AVAudioRecorderDelegate {
+    
+    var recordedAudioURL: URL!
+    
     
     let micIconSize: CGFloat = 150.0
+    var audioRecorder: AVAudioRecorder!
+    
     
     let instructionLabel: UILabel = {
         let label = UILabel()
@@ -36,11 +42,12 @@ class RecordSoundsController: UIViewController {
         if isRecording == false {
             let openingImage = UIImage(named: imageNames.stop.rawValue)
             recordButton.setImage(openingImage, for: .normal)
+            print("isRecording = false")
+            recordAudio()
         } else {
+            stopRecording()
             let openingImage = UIImage(named: imageNames.microphone.rawValue)
             recordButton.setImage(openingImage, for: .normal)
-            let newPlaySoundController = PlaySoundsController()
-            navigationController?.pushViewController(newPlaySoundController, animated: true)
         }
         isRecording = !isRecording
         updateInstructionLabel()

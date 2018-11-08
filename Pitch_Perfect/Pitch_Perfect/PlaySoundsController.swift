@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PlaySoundsController: UIViewController {
     
-    enum ButtonTags: Int {
-        case slow = 111
-        case echo = 222
-        case fast = 333
-        case chipmunk = 444
-        case darthvader = 555
-        case reverb = 666
+    var recordedAudioURL: URL!
+    var audioFile:AVAudioFile!
+    var audioEngine:AVAudioEngine!
+    var audioPlayerNode: AVAudioPlayerNode!
+    var stopTimer: Timer!
+
+    enum ButtonType: Int {
+        case slow = 0, echo, fast, chipmunk, darthvader, reverb
     }
     
     let slowButton: UIButton = {
@@ -25,7 +27,7 @@ class PlaySoundsController: UIViewController {
         button.setImage(openingImage, for: .normal)
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.red
-        button.tag = ButtonTags.slow.rawValue
+        button.tag = ButtonType.slow.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = button.bounds.size.width / 2
         return button
@@ -38,7 +40,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.green
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = ButtonTags.echo.rawValue
+        button.tag = ButtonType.echo.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -50,7 +52,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.yellow
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = ButtonTags.fast.rawValue
+        button.tag = ButtonType.fast.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -62,7 +64,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.teal
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = ButtonTags.chipmunk.rawValue
+        button.tag = ButtonType.chipmunk.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -75,7 +77,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.orange
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = ButtonTags.darthvader.rawValue
+        button.tag = ButtonType.darthvader.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -87,7 +89,7 @@ class PlaySoundsController: UIViewController {
         button.imageView?.contentMode = .scaleToFill
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = button.bounds.size.width / 2
-        button.tag = ButtonTags.reverb.rawValue
+        button.tag = ButtonType.reverb.rawValue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -154,6 +156,7 @@ class PlaySoundsController: UIViewController {
                 $0.clipsToBounds = true
             }
         }
+       configureUI(.notPlaying)  //set the buttons when music is playing
     }
 
     override func viewDidLoad() {
@@ -180,6 +183,8 @@ class PlaySoundsController: UIViewController {
             backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backButton.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 40)
             ])
+        
+        setupAudio()  //loads up the recorded file from RecordSoundsController()
     }
     
     private func setupNavigationBar(){
@@ -188,12 +193,26 @@ class PlaySoundsController: UIViewController {
     }
     
     @objc func handleSoundButton(_ sender: UIButton?){
-        print("BUTTON PRESSED, tag = \(sender?.tag ?? 0)")
+        switch(ButtonType(rawValue: (sender?.tag)!)!) {
+        case .slow:
+            playSound(rate: 0.5)
+        case .fast:
+            playSound(rate: 1.5)
+        case .chipmunk:
+            playSound(pitch: 1000)
+        case .darthvader:
+            playSound(pitch: -1000)
+        case .echo:
+            playSound(echo: true)
+        case .reverb:
+            playSound(reverb: true)
+        }
+        configureUI(.playing)
     }
 
     
     @objc func handleStopButton(_ sender: UIButton?){
-        print("STOPPED Recording")
+        stopAudio()
     }
 
     
