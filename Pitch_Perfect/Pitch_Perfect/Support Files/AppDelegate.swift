@@ -35,10 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         window?.rootViewController = CustomNavigationController(rootViewController: RecordSoundsController())
-//        window?.rootViewController = CustomNavigationController(rootViewController: testController())
-        
-        
-        
         return true
     }
     

@@ -228,6 +228,26 @@ class PlaySoundsController: UIViewController {
         [echoButton, reverbButton].forEach{horizontalRowBtm.addArrangedSubview($0)}
         [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{finalVerticalStack.addArrangedSubview($0)}
     }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.horizontalSizeClass == .regular {
+            finalVerticalStack.axis = .horizontal
+            [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{$0.axis = .vertical}
+            view.addSubview(stopButton)
+        } else if traitCollection.horizontalSizeClass == .compact{
+            finalVerticalStack.axis = .vertical
+            [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{$0.axis = .horizontal}
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
+    
 }
 
 /*
