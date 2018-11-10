@@ -159,6 +159,27 @@ class PlaySoundsController: UIViewController {
        configureUI(.notPlaying)  //set the buttons when music is playing
     }
 
+    func showStopButton(){
+        view.addSubview(stopButton)
+        stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stopButton.topAnchor.constraint(equalTo: finalVerticalStack.bottomAnchor, constant: 30).isActive = true
+    }
+
+    func showBackButton(){
+        view.addSubview(backButton)
+        backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        backButton.bottomAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+    }
+    
+    func removeBackButton(){
+        backButton.removeFromSuperview()
+    }
+    
+    func removeStopButton(){
+        stopButton.removeFromSuperview()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -173,15 +194,23 @@ class PlaySoundsController: UIViewController {
         
         setupSoundButtonStack()
         
-        [finalVerticalStack, stopButton, backButton].forEach{view.addSubview($0)}
+//        [finalVerticalStack, stopButton, backButton].forEach{view.addSubview($0)}
+//        [finalVerticalStack, backButton].forEach{view.addSubview($0)}
+        [finalVerticalStack].forEach{view.addSubview($0)}
+        
         
         NSLayoutConstraint.activate([
             finalVerticalStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             finalVerticalStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
-            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopButton.topAnchor.constraint(equalTo: finalVerticalStack.bottomAnchor, constant: 30),
-            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backButton.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 40)
+            
+//            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            stopButton.topAnchor.constraint(equalTo: finalVerticalStack.bottomAnchor, constant: 30),
+            
+//            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+////            backButton.topAnchor.constraint(equalTo: stopButton.bottomAnchor, constant: 40)
+//            backButton.bottomAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+
+
             ])
         
         setupAudio()  //loads up the recorded file from RecordSoundsController()
@@ -233,21 +262,24 @@ class PlaySoundsController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        if traitCollection.horizontalSizeClass == .regular {
+        if traitCollection.verticalSizeClass == .compact {
             finalVerticalStack.axis = .horizontal
             [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{$0.axis = .vertical}
-            view.addSubview(stopButton)
-        } else if traitCollection.horizontalSizeClass == .compact{
+            removeStopButton()
+            removeBackButton()
+            print("vertical class = compact")
+        } else if traitCollection.verticalSizeClass == .regular{
             finalVerticalStack.axis = .vertical
             [horizontalRowTop, horizontalRowMiddle, horizontalRowBtm].forEach{$0.axis = .horizontal}
+            showStopButton()
+            showBackButton()
+            print("vertical class = regular")
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
     }
-    
 }
 
 /*
